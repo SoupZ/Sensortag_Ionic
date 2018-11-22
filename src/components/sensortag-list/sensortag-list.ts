@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
+import { JsonPipe } from '@angular/common';
+import {BLE_devices} from '../sensortag-list/model_devices'
 
 /**
  * Generated class for the SensortagListComponent component.
@@ -13,21 +15,24 @@ import { BLE } from '@ionic-native/ble';
 })
 export class SensortagListComponent {
 
-  text: string;
+   devices : BLE_devices;
 
   constructor(private ble : BLE) {
 
 
-
+    this.Search_Devices()
        ble.enable()
-       
+
 
 
   }
      Search_Devices() {
   this.ble.startScan([]).subscribe(device => {
-    console.log(JSON.stringify(device));
+     var json_string  = JSON.stringify(device);
+   var obj = JSON.parse(json_string);
 
+   this.devices = new BLE_devices(obj.name,obj.id,obj.advertising,obj.rssi);
+    
   });
 
   setTimeout(() => {
