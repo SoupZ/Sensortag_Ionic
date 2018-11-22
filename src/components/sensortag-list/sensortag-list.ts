@@ -34,7 +34,9 @@ export class SensortagListComponent {
    var obj = JSON.parse(json_string);
 
     this.list.push(new BLE_devices(obj.name,obj.id,obj.advertising,obj.rssi));
-
+    this.list.forEach(element => {
+      console.log(element);
+    });
 });
   // setTimeout(() => {
   //  this.ble.stopScan()
@@ -42,6 +44,12 @@ export class SensortagListComponent {
   // }, 5000);
 }
 
+
+show(event) {
+ 
+  console.log(event.target.innerText);
+
+}
 };
 
 

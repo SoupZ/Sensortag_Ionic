@@ -1,8 +1,36 @@
-<!-- Generated template for the SensortagListComponent component -->
 <div>
-  <ul>
-    <li *ngFor="let hero of heroes">
-      {{ hero }}
-    </li>
-  </ul>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let device of list">
+          <ion-item>
+            <ion-card>
+                <button ion-item (click)="show($event)">
+                    <ion-icon name="bluetooth" item-start></ion-icon>
+                  {{device.name}}
+                  </button>
+                            </ion-card>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+
+
+
 </div>
+
+
+<!-- <ion-list>
+    <ion-item-sliding *ngFor="let country of countries">
+      <ion-item>
+        <ion-card>
+            <img [src]="urlImg" (click)="show()" />
+            <ion-fab right bottom>
+                <button ion-fab (click)="edit()">
+                <ion-icon name="brush"></ion-icon>
+              </button>
+              </ion-fab>
+              <div class="card-title">Amsterdam</div>
+
+        </ion-card>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list> -->
