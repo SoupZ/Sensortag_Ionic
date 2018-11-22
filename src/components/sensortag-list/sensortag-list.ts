@@ -17,6 +17,8 @@ export class SensortagListComponent {
 
    devices : BLE_devices;
 
+   list : Array<BLE_devices> = new Array<BLE_devices>();
+
   constructor(private ble : BLE) {
 
 
@@ -31,12 +33,15 @@ export class SensortagListComponent {
      var json_string  = JSON.stringify(device);
    var obj = JSON.parse(json_string);
 
-   this.devices = new BLE_devices(obj.name,obj.id,obj.advertising,obj.rssi);
-    
-  });
+    this.list.push(new BLE_devices(obj.name,obj.id,obj.advertising,obj.rssi));
 
-  setTimeout(() => {
-   this.ble.stopScan();
-  }, 5000);
-}}
+});
+  // setTimeout(() => {
+  //  this.ble.stopScan()
+
+  // }, 5000);
+}
+
+};
+
 
