@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SensortagPage } from '../pages/Sensortag/sensortag';
 import { BLE } from '@ionic-native/ble';
+import { SensorTagDataPage } from '../pages/sensor-tag-data/sensor-tag-data';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { BLE } from '@ionic-native/ble';
     MyApp,
     SensortagPage,
     SensortagListComponent,
+    SensorTagDataPage,
     HomePage,
     TabsPage
   ],
@@ -28,6 +30,7 @@ import { BLE } from '@ionic-native/ble';
   entryComponents: [
     MyApp,
     SensortagPage,
+    SensorTagDataPage,
     HomePage,
     TabsPage
   ],

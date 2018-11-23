@@ -3,6 +3,8 @@ import { BLE } from '@ionic-native/ble';
 import { JsonPipe } from '@angular/common';
 import {BLE_devices} from '../sensortag-list/model_devices'
 import { ToastController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import { SensorTagDataPage } from '../../pages/sensor-tag-data/sensor-tag-data';
 
 /**
  * Generated class for the SensortagListComponent component.
@@ -20,7 +22,7 @@ export class SensortagListComponent {
 
    list : Array<BLE_devices> = new Array<BLE_devices>();
 
-  constructor(private ble : BLE,private toastCtrl: ToastController) {
+  constructor(private ble : BLE,private toastCtrl: ToastController,public navCtrl: NavController) {
 
 
     this.Search_Devices()
@@ -48,13 +50,18 @@ show(index) {
 
   console.log(this.list[index].name);
   if ((this.list[index].name == null ))  {
-    this.presentToast("Device is not a SensorTag.")
+    this.presentToast("Device is not a SensorTag, can't connect")
+
   }
 
 else if(this.list[index].name.includes(('CC2650' || 'SensorTag'))) {
 
    this.ble.connect(this.list[index].id).subscribe(PeripheralData => {
      this.presentToast("connected!")
+
+      this.navCtrl.push(SensorTagDataPage, {
+        firstPassed : "test123"
+      })
    },PeripheralData => {
     this.presentToast("disconnected!")
    }
@@ -62,7 +69,7 @@ else if(this.list[index].name.includes(('CC2650' || 'SensorTag'))) {
   }
 
    else   {
-   this.presentToast("Device is not a SensorTag.")
+   this.presentToast("Device is not a SensorTag, can't connect.")
    }
 }
 
