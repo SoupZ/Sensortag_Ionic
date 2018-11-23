@@ -45,11 +45,9 @@ export class SensortagListComponent {
 }
 
 
-show(event) {
+show(index) {
 
-
-
-  // console.log(this.list.name?indexOf(event.target.innerText));
+   console.log(this.list[index].id)
 
 }
 };
