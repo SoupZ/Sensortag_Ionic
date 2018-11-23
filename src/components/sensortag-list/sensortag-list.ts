@@ -46,13 +46,24 @@ export class SensortagListComponent {
 
 show(index) {
 
+  console.log(this.list[index].name);
+  if ((this.list[index].name == null ))  {
+    this.presentToast("Device is not a SensorTag.")
+  }
+
+else if(this.list[index].name.includes(('CC2650' || 'SensorTag'))) {
+
    this.ble.connect(this.list[index].id).subscribe(PeripheralData => {
      this.presentToast("connected!")
    },PeripheralData => {
     this.presentToast("disconnected!")
    }
-
    );
+  }
+
+   else   {
+   this.presentToast("Device is not a SensorTag.")
+   }
 }
 
 presentToast(input) {

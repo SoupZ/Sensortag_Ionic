@@ -17,15 +17,6 @@ this.rssi = prssi;
 
 }
 
-
-
-
-
-
-
-
-
-
 }
 
 
