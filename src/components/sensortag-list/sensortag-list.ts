@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
 import { JsonPipe } from '@angular/common';
-import {BLE_devices} from '../sensortag-list/model_devices'
+import { BLE_devices } from '../sensortag-list/model_devices'
 import { ToastController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { SensorTagDataPage } from '../../pages/sensor-tag-data/sensor-tag-data';
@@ -18,68 +18,68 @@ import { SensorTagDataPage } from '../../pages/sensor-tag-data/sensor-tag-data';
 })
 export class SensortagListComponent {
 
-   devices : BLE_devices;
+  devices: BLE_devices;
 
-   list : Array<BLE_devices> = new Array<BLE_devices>();
+  list: Array<BLE_devices> = new Array<BLE_devices>();
 
-  constructor(private ble : BLE,private toastCtrl: ToastController,public navCtrl: NavController) {
+  constructor(private ble: BLE, private toastCtrl: ToastController, public navCtrl: NavController) {
 
 
     this.Search_Devices()
-       ble.enable()
+    ble.enable()
 
 
 
   }
-     Search_Devices() {
-  this.ble.startScan([]).subscribe(device => {
-     var json_string  = JSON.stringify(device);
-   var obj = JSON.parse(json_string);
+  Search_Devices() {
+    this.ble.startScan([]).subscribe(device => {
+      var json_string = JSON.stringify(device);
+      var obj = JSON.parse(json_string);
 
-    this.list.push(new BLE_devices(obj.name,obj.id,obj.advertising,obj.rssi));
+      this.list.push(new BLE_devices(obj.name, obj.id, obj.advertising, obj.rssi));
 
-});
-  // setTimeout(() => {
-  //  this.ble.stopScan()
+    });
+    // setTimeout(() => {
+    //  this.ble.stopScan()
 
-  // }, 5000);
-}
-
-
-show(index) {
-
-  console.log(this.list[index].name);
-  if ((this.list[index].name == null ))  {
-    this.presentToast("Device is not a SensorTag, can't connect")
-
+    // }, 5000);
   }
 
-else if(this.list[index].name.includes(('CC2650' || 'SensorTag'))) {
 
-   this.ble.connect(this.list[index].id).subscribe(PeripheralData => {
-     this.presentToast("connected!")
+  show(index) {
 
-      this.navCtrl.push(SensorTagDataPage, {
-        firstPassed : "test123"
-      })
-   },PeripheralData => {
-    this.presentToast("disconnected!")
-   }
-   );
+    console.log(this.list[index].name);
+    if ((this.list[index].name == null)) {
+      this.presentToast("Device is not a SensorTag, can't connect")
+
+    }
+
+    else if (this.list[index].name.includes(('CC2650' || 'SensorTag'))) {
+
+      this.ble.connect(this.list[index].id).subscribe(PeripheralData => {
+        this.presentToast("connected!")
+
+        this.navCtrl.push(SensorTagDataPage, {
+          idDevice: this.list[index].id
+        })
+      }, PeripheralData => {
+        this.presentToast("disconnected!")
+      }
+      );
+    }
+
+    else {
+      this.presentToast("Device is not a SensorTag, can't connect.")
+    }
   }
 
-   else   {
-   this.presentToast("Device is not a SensorTag, can't connect.")
-   }
-}
-
-presentToast(input) {
-  let toast = this.toastCtrl.create({
-    message: input,
-    duration: 3000,
-    position: 'bottom'
-  });
-  toast.present();
-};
+  presentToast(input) {
+    let toast = this.toastCtrl.create({
+      message: input,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  };
 
 }

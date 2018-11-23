@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
+import { BLE } from '@ionic-native/ble';
 
 /**
  * Generated class for the SensorTagDataPage page.
@@ -14,16 +16,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'sensor-tag-data.html',
 })
 export class SensorTagDataPage {
-  public firstParam;
+  private idDevice;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.firstParam = navParams.get("firstPassed");
-    console.log(this.firstParam);
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private ble: BLE,private toastCtrl: ToastController) {
+    this.idDevice = navParams.get("idDevice");
+    ble.enable()
+    console.log(this.idDevice);
   }
 
   ionViewWillLeave() {
-    console.log("Looks like I'm about to leave :(");
+    this.ble.disconnect(this.idDevice).then(() => {
+      this.presentToast("Disconnected from device");
+
+    });
   }
 
+  presentToast(input) {
+    let toast = this.toastCtrl.create({
+      message: input,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+}
 }
