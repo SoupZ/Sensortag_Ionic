@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
 import { JsonPipe } from '@angular/common';
-import { BLE_devices } from '../sensortag-list/model_devices'
+import { BLE_Device } from './Models/BLE_devices'
 import { ToastController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { SensorTagDataPage } from '../../pages/sensor-tag-data/sensor-tag-data';
@@ -18,25 +18,25 @@ import { SensorTagDataPage } from '../../pages/sensor-tag-data/sensor-tag-data';
 })
 export class SensortagListComponent {
 
-  devices: BLE_devices;
+  devices: BLE_Device;
 
-  list: Array<BLE_devices> = new Array<BLE_devices>();
+  list: Array<BLE_Device> = new Array<BLE_Device>();
 
   constructor(private ble: BLE, private toastCtrl: ToastController, public navCtrl: NavController) {
 
 
-    this.Search_Devices()
+    this.searchDevices()
     ble.enable()
 
 
 
   }
-  Search_Devices() {
+  searchDevices() {
     this.ble.startScan([]).subscribe(device => {
       var json_string = JSON.stringify(device);
       var obj = JSON.parse(json_string);
 
-      this.list.push(new BLE_devices(obj.name, obj.id, obj.advertising, obj.rssi));
+      this.list.push(new BLE_Device(obj.name, obj.id, obj.advertising, obj.rssi));
 
     });
     // setTimeout(() => {
