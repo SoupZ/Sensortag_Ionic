@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
 import { JsonPipe } from '@angular/common';
 import {BLE_devices} from '../sensortag-list/model_devices'
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the SensortagListComponent component.
@@ -19,7 +20,7 @@ export class SensortagListComponent {
 
    list : Array<BLE_devices> = new Array<BLE_devices>();
 
-  constructor(private ble : BLE) {
+  constructor(private ble : BLE,private toastCtrl: ToastController) {
 
 
     this.Search_Devices()
@@ -34,9 +35,7 @@ export class SensortagListComponent {
    var obj = JSON.parse(json_string);
 
     this.list.push(new BLE_devices(obj.name,obj.id,obj.advertising,obj.rssi));
-    this.list.forEach(element => {
-      console.log(element);
-    });
+
 });
   // setTimeout(() => {
   //  this.ble.stopScan()
@@ -47,9 +46,22 @@ export class SensortagListComponent {
 
 show(index) {
 
-   console.log(this.list[index].id)
+   this.ble.connect(this.list[index].id).subscribe(PeripheralData => {
+     this.presentToast("connected!")
+   },PeripheralData => {
+    this.presentToast("disconnected!")
+   }
 
+   );
 }
+
+presentToast(input) {
+  let toast = this.toastCtrl.create({
+    message: input,
+    duration: 3000,
+    position: 'bottom'
+  });
+  toast.present();
 };
 
-
+}
