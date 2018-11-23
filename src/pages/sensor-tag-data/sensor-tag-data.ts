@@ -5,6 +5,7 @@ import { BLE } from '@ionic-native/ble';
 import { Services } from '../../components/sensortag-list/Models/Sensortag_Services';
 
 
+
 /**
  * Generated class for the SensorTagDataPage page.
  *
@@ -19,6 +20,7 @@ import { Services } from '../../components/sensortag-list/Models/Sensortag_Servi
 })
 export class SensorTagDataPage {
   private idDevice;
+  private temperature : string = "0";
 
 
 
@@ -28,7 +30,9 @@ export class SensorTagDataPage {
     //console.log(this.idDevice);
     this.wakeSensors();
   }
-
+  ionViewDidEnter() {
+    this.temp_call().then(data => this.presentToast(data))
+  }
   ionViewWillLeave() {
     this.ble.disconnect(this.idDevice).then(() => {
       this.presentToast("Disconnected from device");
@@ -40,26 +44,26 @@ export class SensorTagDataPage {
     this.wakeBarometer();
 
   }
+
   wakeBarometer() {
     var data = new Uint8Array(1);
-      data[0] = 1;
+    data[0] = 1;
 
- this.ble.write(this.idDevice,Services.barometerGATTService,Services.barometerGATTSCharacteristic,data.buffer).then((callback: string) =>
-console.log(callback)
- )
+    this.ble.write(this.idDevice, Services.barometerGATTService, Services.barometerGATTSCharacteristic, data.buffer).then((callback: string) =>
+      console.log(callback)
+    )
 
- .catch((error: any) => this.presentToast(error))
+      .catch((error: any) => console.log(error))
 
-
- }
-
+  }
 
 
-getDataBarometer () {
-this.ble.read(this.idDevice,Services.barometerGATTService,Services.barometerGATTDATA).then((data : ArrayBuffer) =>
-this.bytesToString(data)
-).catch((error: any) => console.log("Error, can't wake up Barometer sensor"))
-}
+
+  getDataBarometer() {
+    this.ble.read(this.idDevice, Services.barometerGATTService, Services.barometerGATTDATA).then((data: ArrayBuffer) =>
+      this.bytesToString(data)
+    ).catch((error: any) => console.log("Error, can't wake up Barometer sensor"))
+  }
 
 
   presentToast(input) {
@@ -81,23 +85,39 @@ this.bytesToString(data)
       array[i] = string.charCodeAt(i);
     }
     console.log(this.bytesToString(string))
-     return array.buffer;
+    return array.buffer;
 
   }
 
 
 
   bytesToString(buffer) {
-    var datahex =  Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
-   //console.log(datahex);
+    var datahex = Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+    //console.log(datahex);
 
-  this.calculateTemp(datahex);
+    this.calculateTemp(datahex);
 
 
-}
-calculateTemp(rawdata) {
-  var temperature = rawdata[5] + rawdata[4] + rawdata[2] + rawdata[3] + rawdata[0] + rawdata[1];
-  var datatmp = parseInt(temperature,16);
-  console.log((datatmp / 100) + "°C");
-}
+  }
+  calculateTemp(rawdata) {
+    var temperature = rawdata[5] + rawdata[4] + rawdata[2] + rawdata[3] + rawdata[0] + rawdata[1];
+    var datatmp = parseInt(temperature, 16);
+    this.temperature = ((datatmp / 100) + "°C");
+  }
+
+
+
+  temp_call() {
+    return new Promise((resolve, reject) => {
+      setInterval(() => {
+        this.getDataBarometer();
+        resolve("done")
+      }, 5000);
+
+
+    })
+  }
+
+
+
 }
