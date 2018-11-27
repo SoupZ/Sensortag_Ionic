@@ -1,3 +1,4 @@
+import { KnownDevicesPage } from './../pages/known-devices/known-devices';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -20,6 +21,7 @@ import { SensorTagDataPage } from '../pages/sensor-tag-data/sensor-tag-data';
     SensortagListComponent,
     SensorTagDataPage,
     HomePage,
+    KnownDevicesPage,
     TabsPage
   ],
   imports: [
@@ -31,6 +33,7 @@ import { SensorTagDataPage } from '../pages/sensor-tag-data/sensor-tag-data';
     MyApp,
     SensortagPage,
     SensorTagDataPage,
+    KnownDevicesPage,
     HomePage,
     TabsPage
   ],
