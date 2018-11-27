@@ -12,6 +12,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SensortagPage } from '../pages/Sensortag/sensortag';
 import { BLE } from '@ionic-native/ble';
 import { SensorTagDataPage } from '../pages/sensor-tag-data/sensor-tag-data';
+import { SensortagProvider } from '../providers/sensortag/sensortag';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { SensorTagDataPage } from '../pages/sensor-tag-data/sensor-tag-data';
     StatusBar,
     BLE,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SensortagProvider
   ]
 })
 export class AppModule {}
