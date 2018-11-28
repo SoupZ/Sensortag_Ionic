@@ -25,6 +25,7 @@ export class SensorTagDataPage {
   private idDevice;
   private temperature : string = "0";
   private airPressure : string = "0";
+  private temperatureF : string = "0";
 
 
 
@@ -107,6 +108,7 @@ export class SensorTagDataPage {
     var temperature = rawdata[5] + rawdata[4] + rawdata[2] + rawdata[3] + rawdata[0] + rawdata[1];
     var datatmp = parseInt(temperature, 16);
     this.temperature = ((datatmp / 100) + "°C");
+    this.temperatureF = ((temperature * 9/5) + 32) + "°F"
   }
 
   calctbaroData(rawdata) {
@@ -114,7 +116,7 @@ export class SensorTagDataPage {
     console.log("Raw Baro : " ,Baro);
     var databaro = parseInt(Baro,16);
 
-    this.airPressure = ((databaro / 100) + " hPa");
+    this.airPressure = ((databaro / 100)+ "");
     console.log((databaro / 100) + " hPa");
 
   }

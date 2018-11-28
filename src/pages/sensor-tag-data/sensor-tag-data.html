@@ -23,9 +23,32 @@
 
     <ion-item text-center >
         <ion-icon   large color="primary_darker" name="code-download" item-start></ion-icon>
-         <strong   class="temp" color="primary_darker">{{airPressure}}</strong>
+         <strong   class="temp" color="primary_darker">{{airPressure}}hPa</strong>
 
       </ion-item>
+  </ion-list>
+<br>
+  <ion-list item-end >
+<ion-item>
+
+  <strong>Temperature in degrees:</strong>  {{temperature}}
+</ion-item>
+<ion-item>
+
+    <strong>Temperature in fahrenheit:</strong>  {{temperatureF}}
+  </ion-item>
+  <ion-item>
+
+      <strong>Air pressure in Pascal:</strong>  {{airPressure}} hPa
+    </ion-item>
+
+    <ion-item>
+
+        <strong>Air pressure in pressure:</strong>  {{airPressure}} mbar
+      </ion-item>
+
+
+
   </ion-list>
 
 
