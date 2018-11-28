@@ -24,6 +24,7 @@ import { Services } from '../../components/sensortag-list/Models/Sensortag_Servi
 export class SensorTagDataPage {
   private idDevice;
   private temperature : string = "0";
+  private airPressure : string = "0";
 
 
 
@@ -97,7 +98,7 @@ export class SensorTagDataPage {
   bytesToString(buffer) {
     var datahex = Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
     //console.log(datahex);
-
+    this.calctbaroData(datahex);
     this.calculateTemp(datahex);
 
 
@@ -108,12 +109,21 @@ export class SensorTagDataPage {
     this.temperature = ((datatmp / 100) + "°C");
   }
 
+  calctbaroData(rawdata) {
+    var Baro = rawdata[10] + rawdata[11] + rawdata[8] + rawdata[9] + rawdata[6] + rawdata[7];
+    console.log("Raw Baro : " ,Baro);
+    var databaro = parseInt(Baro,16);
 
+    this.airPressure = ((databaro / 100) + " hPa");
+    console.log((databaro / 100) + " hPa");
+
+  }
 
   temp_call() {
     return new Promise((resolve, reject) => {
       setInterval(() => {
         this.getDataBarometer();
+
         resolve("done")
       }, 5000);
 

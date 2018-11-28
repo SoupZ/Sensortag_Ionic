@@ -1,12 +1,23 @@
 <div>
 
     <ion-list>
+
         <ion-item-sliding *ngFor="let device of list; let i = index" >
           <ion-item>
-            <ion-card>
+            <ion-card color="primary_darker" >
                 <button ion-item (click)="show(i)">
-                    <ion-icon name="bluetooth" item-start></ion-icon>
-                  {{device.name}}
+
+
+
+
+                        <ion-icon color="primary_darker" name="bluetooth" item-start></ion-icon>
+                      <strong color="primary_darker"> {{device.name}} </strong>
+
+
+
+
+
+
                   </button>
                             </ion-card>
           </ion-item>

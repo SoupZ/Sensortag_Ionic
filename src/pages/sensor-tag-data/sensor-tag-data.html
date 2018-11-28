@@ -13,13 +13,22 @@
 </ion-header>
 
 
-<ion-content  class="sensor-data-page" padding>
-  <ion-list  color="primary" >
-    <ion-item  color="primary" >
-      <ion-icon name="thermometer" item-start></ion-icon>
-        {{temperature}}
+<ion-content text-center  color="primary_darker" class="sensor-data-page" padding>
+  <ion-list text-center  >
+    <ion-item text-center >
+      <ion-icon   large color="primary_darker" name="thermometer" item-start></ion-icon>
+       <strong   class="temp" color="primary_darker">{{temperature}}</strong>
 
     </ion-item>
+
+    <ion-item text-center >
+        <ion-icon   large color="primary_darker" name="code-download" item-start></ion-icon>
+         <strong   class="temp" color="primary_darker">{{airPressure}}</strong>
+
+      </ion-item>
   </ion-list>
+
+
+
 
 </ion-content>
