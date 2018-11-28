@@ -12,7 +12,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SensortagPage } from '../pages/Sensortag/sensortag';
 import { BLE } from '@ionic-native/ble';
 import { SensorTagDataPage } from '../pages/sensor-tag-data/sensor-tag-data';
-import { SensortagProvider } from '../providers/sensortag/sensortag';
+import { SensortagProvider } from '../providers/sensortag/KnownTagsService';
 
 
 @NgModule({

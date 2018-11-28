@@ -1,8 +1,11 @@
+import { SensortagProvider } from '../../providers/sensortag/KnownTagsService';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import { Services } from '../../components/sensortag-list/Models/Sensortag_Services';
+
+
 
 
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SensortagProvider } from '../../providers/sensortag/KnownTagsService';
+import { BLE_Device } from '../../components/sensortag-list/Models/BLE_devices';
 
 /**
  * Generated class for the KnownDevicesPage page.
@@ -14,12 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'known-devices.html',
 })
 export class KnownDevicesPage {
+  pairedlist: Array<BLE_Device> = new Array<BLE_Device>();
+  constructor(public navCtrl: NavController, public navParams: NavParams,public knownDevices : SensortagProvider) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.pairedlist = knownDevices.getKnownDevices();
+    console.log(this.pairedlist)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad KnownDevicesPage');
   }
+
+
+
 
 }

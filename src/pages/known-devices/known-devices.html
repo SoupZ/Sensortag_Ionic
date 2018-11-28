@@ -15,4 +15,26 @@
 
 <ion-content padding>
 
+  <div>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let device of pairedlist; let i = index" >
+          <ion-item>
+            <ion-card>
+                <!-- <button ion-item (click)="show(i)"> -->
+                    <ion-icon name="bluetooth" item-start></ion-icon>
+                  {{device.name}}
+                  <!-- </button> -->
+                            </ion-card>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+
+
+
+</div>
+
+
+
+
 </ion-content>
