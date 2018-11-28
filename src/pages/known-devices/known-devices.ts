@@ -27,7 +27,9 @@ export class KnownDevicesPage {
     console.log('ionViewDidLoad KnownDevicesPage');
   }
 
+  showTappedDevice(i) {
 
+  }
 
 
 }
