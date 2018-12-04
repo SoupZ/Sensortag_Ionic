@@ -40,6 +40,10 @@ export class SensortagListComponent {
       var json_string = JSON.stringify(device);
       var obj = JSON.parse(json_string);
 
+       if (obj.name == null){
+         obj.name = "Misc";
+       }
+       
       this.list.push(new BLE_Device(obj.name, obj.id, obj.advertising, obj.rssi));
 
     });
