@@ -32,7 +32,9 @@ export class MyApp {
            // show a toast
            const toast = toastCtrl.create({
              message: msg.body,
-             duration: 3000
+             duration: 2000,
+             position: 'top',
+
            });
            toast.present();
          })
