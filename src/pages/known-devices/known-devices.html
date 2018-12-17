@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar  hideBackButton  text-center color="primary_darker" >
-    <ion-title>Paired Devices</ion-title>
+    <ion-title>Paired Devices History</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,9 +20,10 @@
         <ion-item-sliding *ngFor="let device of pairedlist; let i = index" >
           <ion-item>
             <ion-card>
-                <button ion-item (click)="showTappedDevice(i)"> 
+                <button ion-item (click)="showTappedDevice(i)">
                     <ion-icon name="bluetooth" item-start></ion-icon>
-                  {{device.id}}
+                  {{device.id}} <br>
+                  {{device.name}}
                    </button>
              </ion-card>
           </ion-item>
