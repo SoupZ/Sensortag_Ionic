@@ -35,13 +35,14 @@ var firebase = {
     MyApp,
     SensortagPage,
     SensortagListComponent,
-    SensorTagDataPage,
-    HomePage,
-    KnownDevicesPage,
-    TabsPage
+     SensorTagDataPage,
+     HomePage,
+     KnownDevicesPage,
+     TabsPage
   ],
   imports: [
     BrowserModule,
+
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebase),
     AngularFirestoreModule,
@@ -50,11 +51,11 @@ var firebase = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    SensortagPage,
-    SensorTagDataPage,
-    KnownDevicesPage,
-    HomePage,
-    TabsPage
+     SensortagPage,
+     SensorTagDataPage,
+     KnownDevicesPage,
+     HomePage,
+     TabsPage
   ],
   providers: [
     StatusBar,

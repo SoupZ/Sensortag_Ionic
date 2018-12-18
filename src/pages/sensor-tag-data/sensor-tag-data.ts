@@ -1,4 +1,4 @@
-import { SensortagProvider } from '../../providers/sensortag/KnownTagsService';
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
@@ -29,10 +29,12 @@ export class SensorTagDataPage {
 
 
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private ble: BLE, private toastCtrl: ToastController) {
     this.idDevice = navParams.get("idDevice");
     ble.enable()
     //console.log(this.idDevice);
+    console.log(this.airPressure,this.temperature,this.temperatureF);
     this.wakeSensors();
   }
   ionViewDidEnter() {

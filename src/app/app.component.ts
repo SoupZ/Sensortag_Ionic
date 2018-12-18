@@ -6,7 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 
 import { ToastController } from 'ionic-angular';
-import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators';
 import { TabsPage } from '../pages/tabs/tabs';
 

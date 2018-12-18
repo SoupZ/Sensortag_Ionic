@@ -1,7 +1,6 @@
-import { KnownDevicesPage } from './../../pages/known-devices/known-devices';
+
 import { Component } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
-import { JsonPipe } from '@angular/common';
 import { SensortagProvider } from '../../providers/sensortag/KnownTagsService';
 import { BLE_Device } from './Models/BLE_devices'
 import { ToastController } from 'ionic-angular';
@@ -43,7 +42,7 @@ export class SensortagListComponent {
        if (obj.name == null){
          obj.name = "Misc";
        }
-       
+
       this.list.push(new BLE_Device(obj.name, obj.id, obj.advertising, obj.rssi));
 
     });
